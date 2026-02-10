@@ -6,20 +6,8 @@ A web application that generates beautiful city transport maps using OpenStreetM
 
 - ✅ **Global Coverage**: Generate maps for any city worldwide
 - ✅ **Multiple Network Types**: Drive, bike, and walking paths
-- ✅ **Intelligent Caching**: Fast regeneration of previously created maps
 - ✅ **High Resolution**: Export maps up to 600 DPI
-- ✅ **Error Handling**: Comprehensive error checking and user feedback
-- ✅ **Responsive Design**: Works on desktop and mobile
 - ✅ **Free to Use**: Open source and completely free
-
-## 🎯 Use Cases
-
-- **Urban Planning**: Analyze transportation network density
-- **Research**: Study city morphology and street patterns
-- **Art & Design**: Create unique city map posters
-- **Real Estate**: Visualize neighborhood connectivity
-- **Education**: Teaching urban geography and GIS
-- **Travel**: Explore city layouts before visiting
 
 ## 🛠️ Technical Details
 
@@ -29,12 +17,6 @@ A web application that generates beautiful city transport maps using OpenStreetM
 - **GeoPandas**: Geospatial data processing
 - **NetworkX**: Graph analysis
 - **Matplotlib**: Visualization
-
-### Performance Optimizations:
-- **Geocoding Cache**: 24-hour TTL (time-to-live)
-- **Buffer Cache**: 1-hour TTL
-- **Network Data Cache**: 1-hour TTL
-- **Efficient Memory Management**: Figures closed after display
 
 ### Error Handling:
 - City not found detection
