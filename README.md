@@ -2,71 +2,6 @@
 
 A web application that generates beautiful city transport maps using OpenStreetMap data.
 
-## 🚀 Quick Start
-
-### Local Installation
-
-1. **Clone or download this repository**
-
-2. **Install dependencies:**
-```bash
-pip install -r requirements.txt
-```
-
-3. **Run the app:**
-```bash
-streamlit run city_map_app.py
-```
-
-4. **Open your browser** to `http://localhost:8501`
-
-## 🌐 Deploy to Streamlit Cloud (FREE)
-
-### Step-by-Step Deployment:
-
-1. **Create a GitHub account** (if you don't have one)
-   - Go to https://github.com
-   - Sign up for free
-
-2. **Create a new repository**
-   - Click "New repository"
-   - Name it: `city-map-generator`
-   - Make it Public
-   - Don't initialize with README
-
-3. **Upload your files to GitHub**
-
-   **Option A: Using GitHub Web Interface (Easiest)**
-   - Click "uploading an existing file"
-   - Drag and drop all these files:
-     - `city_map_app.py`
-     - `requirements.txt`
-     - `.streamlit/config.toml`
-     - `README.md`
-   - Click "Commit changes"
-
-   **Option B: Using Git Command Line**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git remote add origin https://github.com/YOUR_USERNAME/city-map-generator.git
-   git push -u origin main
-   ```
-
-4. **Deploy on Streamlit Cloud**
-   - Go to https://streamlit.io/cloud
-   - Click "Sign up" and use your GitHub account
-   - Click "New app"
-   - Select your repository: `city-map-generator`
-   - Main file path: `city_map_app.py`
-   - Click "Deploy"
-
-5. **Wait 5-10 minutes** for deployment to complete
-
-6. **Share your app!** You'll get a URL like:
-   `https://YOUR_USERNAME-city-map-generator.streamlit.app`
-
 ## 📋 Features
 
 - ✅ **Global Coverage**: Generate maps for any city worldwide
@@ -116,23 +51,6 @@ streamlit run city_map_app.py
 - **Coordinate System**: Choose appropriate CRS for your region
 - **Network Types**: Drive, bike, walk (select multiple)
 - **Image Quality**: 72-600 DPI
-
-### Recommended Settings by Use Case:
-
-**For Printing (Poster):**
-- Radius: 10-15 km
-- DPI: 300-600
-- Networks: Drive + Bike
-
-**For Quick Preview:**
-- Radius: 5-10 km
-- DPI: 72-150
-- Networks: Drive only
-
-**For Detailed Analysis:**
-- Radius: 5 km
-- DPI: 300
-- Networks: All types
 
 ## 🐛 Troubleshooting
 
@@ -212,21 +130,6 @@ The application code is open source and free to use.
 4. **Right CRS**: Choose CRS matching your region for accurate buffering
 5. **DPI Choice**: 150 DPI is perfect for most uses
 6. **Cache Benefit**: Same city regenerates instantly
-
-## 📞 Support
-
-If you encounter issues:
-1. Check the troubleshooting section
-2. Try with example cities first
-3. Verify internet connection
-4. Clear browser cache
-
-## 🔄 Updates
-
-To update the app:
-1. Pull latest code from repository
-2. Update requirements: `pip install -r requirements.txt --upgrade`
-3. Restart Streamlit
 
 ---
 
