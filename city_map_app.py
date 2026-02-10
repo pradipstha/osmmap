@@ -371,7 +371,7 @@ def main():
         1. **Enter city name** in sidebar
         2. **Adjust settings** (radius, networks)
         3. **Click Generate Map**
-        4. **Download** your map!"""
+        4. **Download** your map!""")
 
         for label, city in examples.items():
             if st.button(label, key=city):
