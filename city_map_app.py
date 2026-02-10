@@ -366,22 +366,10 @@ def main():
 
     with col2:
         st.header("📖 Quick Guide")
-        st.markdown("""
-        ### How to Use:
-        1. **Enter city name** in sidebar
-        2. **Adjust settings** (radius, networks)
-        3. **Click Generate Map**
-        4. **Download** your map!""")
-
         for label, city in examples.items():
             if st.button(label, key=city):
                 st.session_state.example_city = city
                 st.rerun()
-
-        # Check if example was clicked
-        if 'example_city' in st.session_state:
-            city_name = st.session_state.example_city
-            del st.session_state.example_city
 
     with col1:
         if generate_btn:
@@ -539,10 +527,10 @@ def main():
 
         else:
             # Show welcome message when no map generated
-            st.info("👈 Configure your map settings in the sidebar and click 'Generate Map' to begin")
+            st.info(" Configure your map settings in the sidebar and click 'Generate Map' to begin")
 
             st.markdown("---")
-            st.subheader("🌟 Features")
+            st.subheader("Features")
 
             col_a, col_b = st.columns(2)
 
