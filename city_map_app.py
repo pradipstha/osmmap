@@ -546,21 +546,5 @@ def main():
 
             col_a, col_b = st.columns(2)
 
-            with col_a:
-                st.markdown("""
-                - ✅ Any city worldwide
-                - ✅ Multiple network types
-                - ✅ High-resolution export
-                - ✅ Customizable area
-                """)
-
-            with col_b:
-                st.markdown("""
-                - ✅ Fast caching system
-                - ✅ Professional styling
-                - ✅ Easy to use
-                - ✅ Free & open source
-                """)
-
 if __name__ == "__main__":
     main()
