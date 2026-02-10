@@ -373,17 +373,6 @@ def main():
         3. **Click Generate Map**
         4. **Download** your map!
 
-        ### Example Cities:
-        """)
-
-        examples = {
-            "🗼 Paris, France": "Paris, France",
-            "🗽 New York, USA": "New York, New York, USA",
-            "🗾 Tokyo, Japan": "Tokyo, Japan",
-            "🏛️ Barcelona, Spain": "Barcelona, Spain",
-            "🌉 San Francisco, USA": "San Francisco, California, USA"
-        }
-
         for label, city in examples.items():
             if st.button(label, key=city):
                 st.session_state.example_city = city
