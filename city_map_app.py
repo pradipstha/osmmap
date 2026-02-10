@@ -85,28 +85,61 @@ def load_custom_font():
 def geocode_city(city_name, timeout=10):
     """
     Geocode a city name to coordinates with error handling
-
+    
     Args:
         city_name: Name of the city
         timeout: Request timeout in seconds
-
+    
     Returns:
         tuple: (success, location_or_error_message)
     """
     try:
-        geolocator = Nominatim(user_agent="streamlit_osm_map_generator", timeout=timeout)
-        geocode_func = partial(geolocator.geocode, language="en")
-        location = geocode_func(city_name)
-
-        if location is None:
-            return False, f"City '{city_name}' not found. Try adding state/country (e.g., 'Paris, France')"
-
-        logger.info(f"Successfully geocoded: {city_name} -> {location.address}")
-        return True, location
-
+        # Use Nominatim with better configuration
+        geolocator = Nominatim(
+            user_agent="city_transport_map_app_v2",
+            timeout=timeout,
+            domain='nominatim.openstreetmap.org',
+            scheme='https'
+        )
+        
+        # Add retry logic
+        import time
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                location = geolocator.geocode(
+                    city_name,
+                    language="en",
+                    addressdetails=True
+                )
+                
+                if location is None:
+                    return False, f"City '{city_name}' not found. Try adding state/country (e.g., 'Paris, France')"
+                
+                logger.info(f"Successfully geocoded: {city_name} -> {location.address}")
+                return True, location
+                
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    time.sleep(2)  # Wait 2 seconds before retry
+                    continue
+                else:
+                    raise e
+        
     except Exception as e:
-        logger.error(f"Geocoding error: {str(e)}")
-        return False, f"Geocoding error: {str(e)}"
+        error_msg = str(e)
+        logger.error(f"Geocoding error: {error_msg}")
+        
+        # Provide helpful error messages
+        if "timed out" in error_msg.lower():
+            return False, "Geocoding service timed out. Please try again."
+        elif "connection" in error_msg.lower():
+            return False, "Cannot connect to geocoding service. Please try again in a moment."
+        elif "rate" in error_msg.lower() or "limit" in error_msg.lower():
+            return False, "Too many requests. Please wait a minute and try again."
+        else:
+            return False, f"Geocoding error: {error_msg}"
+
 
 # Create buffer around city with caching
 @st.cache_data(ttl=3600)  # Cache for 1 hour
