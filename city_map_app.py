@@ -362,177 +362,168 @@ def main():
             """)
 
     # Main content area
-    col1, col2 = st.columns([2, 1])
 
-    with col2:
-        st.header("📖 Quick Guide")
-        for label, city in examples.items():
-            if st.button(label, key=city):
-                st.session_state.example_city = city
-                st.rerun()
+    if generate_btn:
+        # Load font
+        font_prop = load_custom_font()
 
-    with col1:
-        if generate_btn:
-            # Load font
-            font_prop = load_custom_font()
+        # Progress container
+        progress_container = st.container()
 
-            # Progress container
-            progress_container = st.container()
+        with progress_container:
+            progress_bar = st.progress(0)
+            status_text = st.empty()
 
-            with progress_container:
-                progress_bar = st.progress(0)
-                status_text = st.empty()
+            try:
+                # Step 1: Geocode city
+                status_text.text("🔍 Finding city location...")
+                progress_bar.progress(10)
 
-                try:
-                    # Step 1: Geocode city
-                    status_text.text("🔍 Finding city location...")
-                    progress_bar.progress(10)
+                success, result = geocode_city(city_name)
+                if not success:
+                    st.error(f"❌ {result}")
+                    st.stop()
 
-                    success, result = geocode_city(city_name)
-                    if not success:
-                        st.error(f"❌ {result}")
-                        st.stop()
+                location = result
+                st.success(f"✅ Found: {location.address}")
+                progress_bar.progress(20)
 
-                    location = result
-                    st.success(f"✅ Found: {location.address}")
-                    progress_bar.progress(20)
+                # Step 2: Create buffer
+                status_text.text("📍 Creating study area...")
+                success, result = create_city_buffer(
+                    location.latitude,
+                    location.longitude,
+                    buffer_meters,
+                    crs
+                )
 
-                    # Step 2: Create buffer
-                    status_text.text("📍 Creating study area...")
-                    success, result = create_city_buffer(
-                        location.latitude,
-                        location.longitude,
-                        buffer_meters,
-                        crs
-                    )
+                if not success:
+                    st.error(f"❌ {result}")
+                    st.stop()
 
-                    if not success:
-                        st.error(f"❌ {result}")
-                        st.stop()
+                cities_df = result
+                progress_bar.progress(30)
 
-                    cities_df = result
-                    progress_bar.progress(30)
+                # Step 3: Download networks
+                polygon_wkt = cities_df.buffer.iloc[0].wkt
+                graphs = []
+                networks_downloaded = []
 
-                    # Step 3: Download networks
-                    polygon_wkt = cities_df.buffer.iloc[0].wkt
-                    graphs = []
-                    networks_downloaded = []
+                total_networks = sum([include_drive, include_bike, include_walk])
+                current_network = 0
 
-                    total_networks = sum([include_drive, include_bike, include_walk])
-                    current_network = 0
+                if include_drive:
+                    current_network += 1
+                    status_text.text(f"⬇️ Downloading driving network ({current_network}/{total_networks})...")
+                    success, result = download_osm_network(polygon_wkt, 'drive')
 
-                    if include_drive:
-                        current_network += 1
-                        status_text.text(f"⬇️ Downloading driving network ({current_network}/{total_networks})...")
-                        success, result = download_osm_network(polygon_wkt, 'drive')
-
-                        if success:
-                            graphs.append(result)
-                            networks_downloaded.append("Drive")
-                            st.success("✅ Drive network downloaded")
-                        else:
-                            st.warning(f"⚠️ {result}")
-
-                        progress_bar.progress(30 + (current_network * 20))
-
-                    if include_bike:
-                        current_network += 1
-                        status_text.text(f"⬇️ Downloading bike network ({current_network}/{total_networks})...")
-                        success, result = download_osm_network(polygon_wkt, 'bike')
-
-                        if success:
-                            graphs.append(result)
-                            networks_downloaded.append("Bike")
-                            st.success("✅ Bike network downloaded")
-                        else:
-                            st.warning(f"⚠️ {result}")
-
-                        progress_bar.progress(30 + (current_network * 20))
-
-                    if include_walk:
-                        current_network += 1
-                        status_text.text(f"⬇️ Downloading walking network ({current_network}/{total_networks})...")
-                        success, result = download_osm_network(polygon_wkt, 'walk')
-
-                        if success:
-                            graphs.append(result)
-                            networks_downloaded.append("Walk")
-                            st.success("✅ Walk network downloaded")
-                        else:
-                            st.warning(f"⚠️ {result}")
-
-                        progress_bar.progress(30 + (current_network * 20))
-
-                    if not graphs:
-                        st.error("❌ No networks could be downloaded. Try a different city or smaller radius.")
-                        st.stop()
-
-                    # Step 4: Combine networks
-                    status_text.text("🔗 Combining networks...")
-                    progress_bar.progress(80)
-
-                    if len(graphs) > 1:
-                        combined_graph = graphs[0]
-                        for g in graphs[1:]:
-                            combined_graph = nx.compose(combined_graph, g)
+                    if success:
+                        graphs.append(result)
+                        networks_downloaded.append("Drive")
+                        st.success("✅ Drive network downloaded")
                     else:
-                        combined_graph = graphs[0]
+                        st.warning(f"⚠️ {result}")
 
-                    # Network statistics
-                    st.info(f"📊 Network contains {len(combined_graph.nodes):,} nodes and {len(combined_graph.edges):,} edges")
+                    progress_bar.progress(30 + (current_network * 20))
 
-                    # Step 5: Generate map
-                    status_text.text("🎨 Creating visualization...")
-                    progress_bar.progress(90)
+                if include_bike:
+                    current_network += 1
+                    status_text.text(f"⬇️ Downloading bike network ({current_network}/{total_networks})...")
+                    success, result = download_osm_network(polygon_wkt, 'bike')
 
-                    success, result = generate_map_image(combined_graph, city_name, font_prop)
+                    if success:
+                        graphs.append(result)
+                        networks_downloaded.append("Bike")
+                        st.success("✅ Bike network downloaded")
+                    else:
+                        st.warning(f"⚠️ {result}")
 
-                    if not success:
-                        st.error(f"❌ {result}")
-                        st.stop()
+                    progress_bar.progress(30 + (current_network * 20))
 
-                    fig = result
-                    progress_bar.progress(100)
-                    status_text.text("✅ Map generated successfully!")
-                    time.sleep(0.5)
+                if include_walk:
+                    current_network += 1
+                    status_text.text(f"⬇️ Downloading walking network ({current_network}/{total_networks})...")
+                    success, result = download_osm_network(polygon_wkt, 'walk')
 
-                    # Clear progress indicators
-                    progress_container.empty()
+                    if success:
+                        graphs.append(result)
+                        networks_downloaded.append("Walk")
+                        st.success("✅ Walk network downloaded")
+                    else:
+                        st.warning(f"⚠️ {result}")
 
-                    # Display map
-                    st.success(f"🎉 Map of {city_name} generated successfully!")
-                    st.markdown(f"**Networks included:** {', '.join(networks_downloaded)}")
+                    progress_bar.progress(30 + (current_network * 20))
 
-                    st.pyplot(fig)
+                if not graphs:
+                    st.error("❌ No networks could be downloaded. Try a different city or smaller radius.")
+                    st.stop()
 
-                    # Download button
-                    filename = f"{city_name.replace(' ', '_').replace(',', '')}_transport_map.png"
-                    img_bytes = fig_to_bytes(fig, dpi=dpi)
+                # Step 4: Combine networks
+                status_text.text("🔗 Combining networks...")
+                progress_bar.progress(80)
 
-                    st.download_button(
-                        label=f"📥 Download Map (PNG, {dpi} DPI)",
-                        data=img_bytes,
-                        file_name=filename,
-                        mime="image/png",
-                        type="primary"
-                    )
+                if len(graphs) > 1:
+                    combined_graph = graphs[0]
+                    for g in graphs[1:]:
+                        combined_graph = nx.compose(combined_graph, g)
+                else:
+                    combined_graph = graphs[0]
 
-                    # Close figure to free memory
-                    plt.close(fig)
+                # Network statistics
+                st.info(f"📊 Network contains {len(combined_graph.nodes):,} nodes and {len(combined_graph.edges):,} edges")
 
-                except Exception as e:
-                    logger.error(f"Unexpected error: {str(e)}")
-                    st.error(f"❌ An unexpected error occurred: {str(e)}")
-                    st.info("💡 Try reducing the map radius or choosing a different city")
+                # Step 5: Generate map
+                status_text.text("🎨 Creating visualization...")
+                progress_bar.progress(90)
 
-        else:
-            # Show welcome message when no map generated
-            st.info(" Configure your map settings in the sidebar and click 'Generate Map' to begin")
+                success, result = generate_map_image(combined_graph, city_name, font_prop)
 
-            st.markdown("---")
-            st.subheader("Features")
+                if not success:
+                    st.error(f"❌ {result}")
+                    st.stop()
 
-            col_a, col_b = st.columns(2)
+                fig = result
+                progress_bar.progress(100)
+                status_text.text("✅ Map generated successfully!")
+                time.sleep(0.5)
+
+                # Clear progress indicators
+                progress_container.empty()
+
+                # Display map
+                st.success(f"🎉 Map of {city_name} generated successfully!")
+                st.markdown(f"**Networks included:** {', '.join(networks_downloaded)}")
+
+                st.pyplot(fig)
+
+                # Download button
+                filename = f"{city_name.replace(' ', '_').replace(',', '')}_transport_map.png"
+                img_bytes = fig_to_bytes(fig, dpi=dpi)
+
+                st.download_button(
+                    label=f"📥 Download Map (PNG, {dpi} DPI)",
+                    data=img_bytes,
+                    file_name=filename,
+                    mime="image/png",
+                    type="primary"
+                )
+
+                # Close figure to free memory
+                plt.close(fig)
+
+            except Exception as e:
+                logger.error(f"Unexpected error: {str(e)}")
+                st.error(f"❌ An unexpected error occurred: {str(e)}")
+                st.info("💡 Try reducing the map radius or choosing a different city")
+
+    else:
+        # Show welcome message when no map generated
+        st.info(" Configure your map settings in the sidebar and click 'Generate Map' to begin")
+
+        st.markdown("---")
+        st.subheader("Features")
+
+        col_a, col_b = st.columns(2)
 
 if __name__ == "__main__":
     main()
