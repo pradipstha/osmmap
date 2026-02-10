@@ -405,7 +405,7 @@ def main():
                 progress_bar.progress(30)
 
                 # Step 3: Download networks
-                polygon_wkt = cities_df.buffer.iloc[0].wkt
+                polygon_wkt = cities_df.geometry.iloc[0].wkt
                 graphs = []
                 networks_downloaded = []
 
