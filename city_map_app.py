@@ -252,7 +252,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
             base_kwargs['fontproperties'] = font_prop
 
         city_kwargs = dict(base_kwargs)
-        city_kwargs.update({'fontsize': 23, 'weight': 'bold'})
+        city_kwargs.update({'fontsize': 20, 'weight': 'bold'})
         network_kwargs = dict(base_kwargs)
         network_kwargs.update({'fontsize': 15})
 
