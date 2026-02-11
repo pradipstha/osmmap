@@ -7,7 +7,6 @@ A web application that generates city transport maps using OpenStreetMap data.
 - ✅ **Global Coverage**: Generate maps for any city worldwide
 - ✅ **Multiple Network Types**: Drive, bike, and walking paths
 - ✅ **High Resolution**: Export maps up to 600 DPI
-- ✅ **Free to Use**: Open source and completely free
 
 ### Technologies Used:
 - **Streamlit**: Web framework
@@ -15,12 +14,6 @@ A web application that generates city transport maps using OpenStreetMap data.
 - **GeoPandas**: Geospatial data processing
 - **NetworkX**: Graph analysis
 - **Matplotlib**: Visualization
-
-### In the Sidebar:
-- **City Name**: Any city worldwide
-- **Map Radius**: 5-50 km around city center
-- **Coordinate System**: Choose appropriate CRS for your region
-- **Network Types**: Drive, bike, walk (select multiple)
 
 ### Common Issues:
 
@@ -75,13 +68,10 @@ A web application that generates city transport maps using OpenStreetMap data.
 
 This application uses OpenStreetMap data, which is © OpenStreetMap contributors and available under the Open Database License (ODbL).
 
-The application code is open source and free to use.
-
 ## 🤝 Credits
 
 - **OpenStreetMap**: Map data
 - **OSMnx**: Geoff Boeing
-- **Lato Font**: Łukasz Dziedzic
 
 ## 💡 Tips for Best Results
 
