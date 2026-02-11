@@ -260,8 +260,9 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         gap = 0.018 
         network_y = city_y + gap
 
-        ax.text(0.5, city_y, formatted_city_name, **city_kwargs)
         ax.text(0.5, network_y, network_types, **network_kwargs)
+        ax.text(0.5, city_y, formatted_city_name, **city_kwargs)
+        
         fig.subplots_adjust(top=0.08, bottom=0.98)
 
         logger.info("Map visualization created successfully")
