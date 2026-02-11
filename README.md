@@ -45,7 +45,6 @@ A web application that generates city transport maps using OpenStreetMap data.
 - Amsterdam, Netherlands
 - Bangkok, Thailand
 - Sydney, Australia
-- Cairo, Egypt
 
 ## 📝 License
 
