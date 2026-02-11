@@ -364,7 +364,7 @@ def main():
         dpi = st.select_slider(
             "Image Quality (DPI)",
             options=[100, 250, 500, 600],
-            value=150,
+            value=250,
             help="Higher DPI = better quality but larger file size"
         )
 
