@@ -81,7 +81,7 @@ def load_custom_font():
         return None
 
 # Geocode city with caching
-@st.cache_data(ttl=86400)  # Cache for 24 hours
+@st.cache_data(ttl=86400)  
 def geocode_city(city_name, timeout=10):
     """
     Geocode a city name to coordinates with error handling
@@ -142,7 +142,7 @@ def geocode_city(city_name, timeout=10):
 
 
 # Create buffer around city with caching
-@st.cache_data(ttl=3600)  # Cache for 1 hour
+@st.cache_data(ttl=3600)  
 def create_city_buffer(latitude, longitude, buffer_meters, crs_code):
     """
     Create a buffered area around city coordinates
@@ -179,7 +179,7 @@ def create_city_buffer(latitude, longitude, buffer_meters, crs_code):
         return False, f"Error creating buffer: {str(e)}"
 
 # Download OSM network data with caching
-@st.cache_data(ttl=3600, show_spinner=False)  # Cache for 1 hour
+@st.cache_data(ttl=3600, show_spinner=False)  
 def download_osm_network(polygon_wkt, network_type):
     """
     Download OSM network data for given polygon
@@ -268,10 +268,10 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         # Add credit at BOTTOM RIGHT
         credit_kwargs = {
             'color': 'white',
-            'ha': 'right',              # Right-aligned
+            'ha': 'right',              
             'va': 'bottom',
-            'fontsize': 9,             # Smaller font for credit
-            'alpha': 0.7,               # Slightly transparent
+            'fontsize': 9,             
+            'alpha': 0.7,               
             'transform': ax.transAxes
         }
         if font_prop:
@@ -363,7 +363,7 @@ def main():
         st.markdown("---")
         dpi = st.select_slider(
             "Image Quality (DPI)",
-            options=[100, 150, 300, 600],
+            options=[100, 250, 500, 600],
             value=150,
             help="Higher DPI = better quality but larger file size"
         )
@@ -537,7 +537,7 @@ def main():
                 img_bytes = fig_to_bytes(fig, dpi=dpi)
 
                 st.download_button(
-                    label=f"📥 Download Map (PNG, {dpi} DPI)",
+                    label=f"Download Map (PNG, {dpi} DPI)",
                     data=img_bytes,
                     file_name=filename,
                     mime="image/png",
