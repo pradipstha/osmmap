@@ -289,7 +289,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         return False, f"Error generating map: {str(e)}"
 
 # Convert figure to bytes for download
-def fig_to_bytes(fig, dpi=250):
+def fig_to_bytes(fig, dpi=150):
     """Convert matplotlib figure to bytes"""
     buf = io.BytesIO()
     fig.savefig(buf, format='png', dpi=dpi, bbox_inches='tight', facecolor='black')
@@ -363,8 +363,8 @@ def main():
         st.markdown("---")
         dpi = st.select_slider(
             "Image Quality (DPI)",
-            options=[100, 250, 500, 600],
-            value=250,
+            options=[72, 150, 300, 600],
+            value=150,
             help="Higher DPI = better quality but larger file size"
         )
 
