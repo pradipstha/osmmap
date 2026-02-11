@@ -40,35 +40,20 @@ A web application that generates city transport maps using OpenStreetMap data.
 
 ## 📊 Example Cities to Try
 
-### North America:
 - New York, New York, USA
 - San Francisco, California, USA
-- Mexico City, Mexico
-- Toronto, Ontario, Canada
-
-### Europe:
-- Paris, France
 - Barcelona, Spain
 - Amsterdam, Netherlands
-- Rome, Italy
-
-### Asia:
-- Tokyo, Japan
-- Singapore
 - Bangkok, Thailand
 - Seoul, South Korea
-
-### Other:
 - Sydney, Australia
-- São Paulo, Brazil
 - Cairo, Egypt
-- Cape Town, South Africa
 
 ## 📝 License
 
 This application uses OpenStreetMap data, which is © OpenStreetMap contributors and available under the Open Database License (ODbL).
 
-## 🤝 Credits
+## Credits
 
 - **OpenStreetMap**: Map data
 - **OSMnx**: Geoff Boeing
