@@ -352,9 +352,9 @@ def main():
         st.markdown("---")
         st.subheader("Network Types")
 
-        include_drive = st.checkbox("Driving Roads", value=True)
-        include_bike = st.checkbox("Bike Paths", value=True)
-        include_walk = st.checkbox("Street Paths", value=False)
+        include_drive = st.checkbox("Driving Road", value=True)
+        include_bike = st.checkbox("Bike Path", value=True)
+        include_walk = st.checkbox("Walking Street", value=False)
 
         if not (include_drive or include_bike or include_walk):
             st.warning("⚠️ Select at least one network type")
@@ -372,7 +372,7 @@ def main():
         generate_btn = st.button("🚀 Generate Map", type="primary", disabled=not (include_drive or include_bike or include_walk))
 
         # Info section
-        with st.expander("ℹ️ Tips & Info"):
+        with st.expander("Tips & Info"):
             st.markdown("""
             **Tips for best results:**
             - Include country/state in city name
