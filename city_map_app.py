@@ -220,6 +220,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
     Args:
         graph: NetworkX graph of street network
         city_name: Name of the city for labeling
+        network_types: String describing network types
         font_prop: Font properties for text
 
     Returns:
@@ -238,14 +239,14 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
             close=False
         )
 
-        ax.set_position([0.05, 0.15, 0.9, 0.75])
+        ax.set_position([0.05, 0.18, 0.9, 0.72])
         formatted_city_name = city_name.title()
 
         # Add network types label
         network_kwargs = {'fontsize': 15, 'color': 'white', 'ha': 'center'}
         if font_prop:
             network_kwargs['fontproperties'] = font_prop
-        ax.text(0.5, 0.09, network_types,
+        ax.text(0.5, 0.10, network_types,
                transform=ax.transAxes,
                **network_kwargs)
 
@@ -253,7 +254,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         city_kwargs = {'fontsize': 25, 'color': 'white', 'ha': 'center', 'weight': 'bold'}
         if font_prop:
             city_kwargs['fontproperties'] = font_prop
-        ax.text(0.5, 0.03, formatted_city_name,
+        ax.text(0.5, 0.04, formatted_city_name,
                 transform=ax.transAxes,
                 **city_kwargs)
 
