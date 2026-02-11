@@ -354,7 +354,7 @@ def main():
 
         include_drive = st.checkbox("Driving Roads", value=True)
         include_bike = st.checkbox("Bike Paths", value=True)
-        include_walk = st.checkbox("Walking Paths", value=False)
+        include_walk = st.checkbox("Street Paths", value=False)
 
         if not (include_drive or include_bike or include_walk):
             st.warning("⚠️ Select at least one network type")
@@ -475,7 +475,7 @@ def main():
 
                 if include_walk:
                     current_network += 1
-                    status_text.text(f"Downloading walking network ({current_network}/{total_networks})...")
+                    status_text.text(f"Downloading street network ({current_network}/{total_networks})...")
                     success, result = download_osm_network(polygon_wkt, 'walk')
 
                     if success:
