@@ -1,6 +1,6 @@
 # City Transport Map Generator - Streamlit App
 
-A web application that generates beautiful city transport maps using OpenStreetMap data.
+A web application that generates city transport maps using OpenStreetMap data.
 
 ## 📋 Features
 
@@ -9,8 +9,6 @@ A web application that generates beautiful city transport maps using OpenStreetM
 - ✅ **High Resolution**: Export maps up to 600 DPI
 - ✅ **Free to Use**: Open source and completely free
 
-## 🛠️ Technical Details
-
 ### Technologies Used:
 - **Streamlit**: Web framework
 - **OSMnx**: OpenStreetMap data extraction
@@ -18,23 +16,12 @@ A web application that generates beautiful city transport maps using OpenStreetM
 - **NetworkX**: Graph analysis
 - **Matplotlib**: Visualization
 
-### Error Handling:
-- City not found detection
-- Network download failures
-- Invalid input validation
-- Timeout management
-- Memory optimization for large cities
-
-## ⚙️ Configuration Options
-
 ### In the Sidebar:
 - **City Name**: Any city worldwide (include country for best results)
 - **Map Radius**: 5-50 km around city center
 - **Coordinate System**: Choose appropriate CRS for your region
 - **Network Types**: Drive, bike, walk (select multiple)
 - **Image Quality**: 72-600 DPI
-
-## 🐛 Troubleshooting
 
 ### Common Issues:
 
@@ -84,13 +71,6 @@ A web application that generates beautiful city transport maps using OpenStreetM
 - São Paulo, Brazil
 - Cairo, Egypt
 - Cape Town, South Africa
-
-## 🔒 Privacy & Data
-
-- **No data collection**: App doesn't store any user data
-- **Caching**: Local cache only (not shared between users)
-- **OpenStreetMap**: All map data from OSM (ODbL license)
-- **No API keys needed**: Completely open and free
 
 ## 📝 License
 
