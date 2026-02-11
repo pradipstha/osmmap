@@ -38,14 +38,12 @@ A web application that generates city transport maps using OpenStreetMap data.
 3. Popular cities cache faster due to OSM optimization
 4. Lower DPI for testing, increase for final export
 
-## 📊 Example Cities to Try
+## 📊 Cities To Try
 
 - New York, New York, USA
-- San Francisco, California, USA
 - Barcelona, Spain
 - Amsterdam, Netherlands
 - Bangkok, Thailand
-- Seoul, South Korea
 - Sydney, Australia
 - Cairo, Egypt
 
@@ -70,7 +68,7 @@ This application uses OpenStreetMap data, which is © OpenStreetMap contributors
 
 ---
 
-**Made with ❤️ using Streamlit and OpenStreetMap**
+**Made with ❤️ using Streamlit**
 
 
 <img width="800" height="800" alt="biratnagar_nepal_transport_map" src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" />
