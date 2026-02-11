@@ -228,9 +228,11 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
     """
     try:
         # Create figure
-        fig, ax = ox.plot_graph(
+        fig = plt.figure(figsize=(20, 22), facecolor='black')
+        ax = fig.add_axes([0.05, 0.15, 0.9, 0.75])
+        ax = ox.plot_graph(
             graph,
-            figsize=(20, 20),
+            figsize=(30, 30),
             node_size=0,
             edge_color='white',
             edge_linewidth=0.5,
@@ -238,22 +240,22 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
             show=False,
             close=False
         )
-
-        ax.set_position([0.05, 0.18, 0.9, 0.72])
+        ax.axis('off')
+     
         formatted_city_name = city_name.title()
 
         # Add network types label
         network_kwargs = {'fontsize': 18, 'color': 'white', 'ha': 'center'}
         if font_prop:
             network_kwargs['fontproperties'] = font_prop
-        fig.text(0.5, 0.10, network_types,
+        fig.text(0.5, 0.08, network_types,
                **network_kwargs)
 
         # Add city name         
         city_kwargs = {'fontsize': 30, 'color': 'white', 'ha': 'center', 'weight': 'bold'}
         if font_prop:
             city_kwargs['fontproperties'] = font_prop
-        fig.text(0.5, 0.04, formatted_city_name,
+        fig.text(0.5, 0.03, formatted_city_name,
                 **city_kwargs)
 
         logger.info("Map visualization created successfully")
