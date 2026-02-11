@@ -72,6 +72,7 @@ This application uses OpenStreetMap data, which is © OpenStreetMap contributors
 
 - **OpenStreetMap**: Map data
 - **OSMnx**: Geoff Boeing
+- **AI**: Claude Sonnet 4.5 
 
 ## 💡 Tips for Best Results
 
