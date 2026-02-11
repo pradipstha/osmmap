@@ -247,6 +247,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
             'ha': 'center',
             'va': 'bottom',
             'transform': ax.transAxes}
+        
         if font_prop:
             base_kwargs['fontproperties'] = font_prop
 
@@ -256,14 +257,14 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         network_kwargs.update({'fontsize': 18})
 
         # Place at bottom inside axes; minimal gap
-        city_y = 0.04
-        gap = 0.018 
+        city_y = 0.03
+        gap = 0.065 
         network_y = city_y + gap
 
         ax.text(0.5, network_y, network_types, **network_kwargs)
         ax.text(0.5, city_y, formatted_city_name, **city_kwargs)
         
-        fig.subplots_adjust(top=0.08, bottom=0.98)
+        fig.subplots_adjust(top=0.98, bottom=0.02)
 
         logger.info("Map visualization created successfully")
         return True, fig
