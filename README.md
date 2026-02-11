@@ -2,7 +2,7 @@
 
 A web application that generates city transport maps using OpenStreetMap data.
 
-## 📋 Features
+## Features
 
 - ✅ **Global Coverage**: Generate maps for any city worldwide
 - ✅ **Multiple Network Types**: Drive, bike, and walking paths
