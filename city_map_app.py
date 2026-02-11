@@ -99,17 +99,15 @@ def geocode_city(city_name):
         if gdf.empty:
             return False, f"City '{city_name}' not found."
 
-        location = gdf.iloc[0]
-        lat = location.geometry.centroid.y
-        lon = location.geometry.centroid.x
+        geom = gdf.iloc[0].geometry
+        lat = geom.centroid.y
+        lon = geom.centroid.x
 
-        class SimpleLocation:
-            def __init__(self, lat, lon, address):
-                self.latitude = lat
-                self.longitude = lon
-                self.address = address
-
-        return True, SimpleLocation(lat, lon, city_name)
+        return True, {
+            "latitude": lat,
+            "longitude": lon,
+            "address": city_name
+        }
 
     except Exception as e:
         return False, f"Geocoding error: {str(e)}"
@@ -305,11 +303,8 @@ def main():
             "UTM Zone 10N (West US)": 32610,
             "UTM Zone 33N (Europe)": 32633,
             "UTM Zone 43N (India West/Central)": 32643,
-            "UTM Zone 44N (India Central/East)": 32644,
             "UTM Zone 45N (India East/Bangladesh)": 32645,
-            "UTM Zone 46N (Bangladesh East)": 32646,
             "UTM Zone 47N (Thailand/Myanmar)": 32647,
-            "UTM Zone 48N (Vietnam)": 32648,
             "UTM Zone 51N (Japan/Korea)": 32651,
         }
 
@@ -391,14 +386,14 @@ def main():
                     st.stop()
 
                 location = result
-                st.success(f"✅ Found: {location.address}")
+                st.success(f"✅ Found: {location['address']}}")
                 progress_bar.progress(20)
 
                 # Step 2: Create buffer
                 status_text.text("📍 Creating study area...")
                 success, result = create_city_buffer(
-                    location.latitude,
-                    location.longitude,
+                    location["latitude"]
+                    location["longitude"]
                     buffer_meters,
                     crs
                 )
