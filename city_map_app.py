@@ -241,26 +241,28 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
      
         formatted_city_name = city_name.title()
 
-        title_kwargs = {
-            'fontsize': 30, 
-            'color': 'white', 
-            'ha': 'center', 
-            'va': 'top', 
-            'weight': 'bold', 
-            'transform': ax.transAxes } 
-        subtitle_kwargs = {
-            'fontsize': 18, 
-            'color': 'white', 
-            'ha': 'center', 
-            'va': 'top', 
-            'transform': ax.transAxes }
+        # Base style
+        base_kwargs = {
+            'color': 'white',
+            'ha': 'center',
+            'va': 'bottom',
+            'transform': ax.transAxes}
         if font_prop:
-            title_kwargs['fontproperties'] = font_prop
-            subtitle_kwargs['fontproperties'] = font_prop
+            base_kwargs['fontproperties'] = font_prop
 
-        ax.text(0.5, 0.98, formatted_city_name, **title_kwargs)
-        ax.text(0.5, 0.94, network_types, **subtitle_kwargs)
-        fig.subplots_adjust(top=0.92, bottom=0.05)
+        city_kwargs = dict(base_kwargs)
+        city_kwargs.update({'fontsize': 30, 'weight': 'bold'})
+        network_kwargs = dict(base_kwargs)
+        network_kwargs.update({'fontsize': 18})
+
+        # Place at bottom inside axes; minimal gap
+        city_y = 0.03
+        gap = 0.02 
+        network_y = city_y + gap
+
+        ax.text(0.5, city_y, formatted_city_name, **title_kwargs)
+        ax.text(0.5, network_y, network_types, **subtitle_kwargs)
+        fig.subplots_adjust(top=0.08, bottom=0.98)
 
         logger.info("Map visualization created successfully")
         return True, fig
