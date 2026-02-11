@@ -270,7 +270,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
             'color': 'white',
             'ha': 'right',              # Right-aligned
             'va': 'bottom',
-            'fontsize': 8,             # Smaller font for credit
+            'fontsize': 9,             # Smaller font for credit
             'alpha': 0.7,               # Slightly transparent
             'transform': ax.transAxes
         }
@@ -352,9 +352,9 @@ def main():
         st.markdown("---")
         st.subheader("Network Types")
 
-        include_drive = st.checkbox("🚗 Driving Roads", value=True)
-        include_bike = st.checkbox("🚴 Bike Paths", value=True)
-        include_walk = st.checkbox("🚶 Walking Paths", value=False)
+        include_drive = st.checkbox("Driving Roads", value=True)
+        include_bike = st.checkbox("Bike Paths", value=True)
+        include_walk = st.checkbox("Walking Paths", value=False)
 
         if not (include_drive or include_bike or include_walk):
             st.warning("⚠️ Select at least one network type")
@@ -363,7 +363,7 @@ def main():
         st.markdown("---")
         dpi = st.select_slider(
             "Image Quality (DPI)",
-            options=[72, 150, 300, 600],
+            options=[100, 150, 300, 600],
             value=150,
             help="Higher DPI = better quality but larger file size"
         )
@@ -447,13 +447,13 @@ def main():
 
                 if include_drive:
                     current_network += 1
-                    status_text.text(f"⬇️ Downloading driving network ({current_network}/{total_networks})...")
+                    status_text.text(f"Downloading driving network ({current_network}/{total_networks})...")
                     success, result = download_osm_network(polygon_wkt, 'drive')
 
                     if success:
                         graphs.append(result)
                         networks_downloaded.append("Drive")
-                        st.success("✅ Drive network downloaded")
+                        st.success("Drive network downloaded")
                     else:
                         st.warning(f"⚠️ {result}")
 
@@ -461,13 +461,13 @@ def main():
 
                 if include_bike:
                     current_network += 1
-                    status_text.text(f"⬇️ Downloading bike network ({current_network}/{total_networks})...")
+                    status_text.text(f"Downloading bike network ({current_network}/{total_networks})...")
                     success, result = download_osm_network(polygon_wkt, 'bike')
 
                     if success:
                         graphs.append(result)
                         networks_downloaded.append("Bike")
-                        st.success("✅ Bike network downloaded")
+                        st.success("Bike network downloaded")
                     else:
                         st.warning(f"⚠️ {result}")
 
@@ -475,24 +475,24 @@ def main():
 
                 if include_walk:
                     current_network += 1
-                    status_text.text(f"⬇️ Downloading walking network ({current_network}/{total_networks})...")
+                    status_text.text(f"Downloading walking network ({current_network}/{total_networks})...")
                     success, result = download_osm_network(polygon_wkt, 'walk')
 
                     if success:
                         graphs.append(result)
                         networks_downloaded.append("Walk")
-                        st.success("✅ Walk network downloaded")
+                        st.success("Walk network downloaded")
                     else:
                         st.warning(f"⚠️ {result}")
 
                     progress_bar.progress(30 + (current_network * 20))
 
                 if not graphs:
-                    st.error("❌ No networks could be downloaded. Try a different city or smaller radius.")
+                    st.error("No networks could be downloaded. Try a different city or smaller radius.")
                     st.stop()
 
                 # Step 4: Combine networks
-                status_text.text("🔗 Combining networks...")
+                status_text.text("Combining networks...")
                 progress_bar.progress(80)
 
                 if len(graphs) > 1:
@@ -503,7 +503,7 @@ def main():
                     combined_graph = graphs[0]
 
                 # Network statistics
-                st.info(f"📊 Network contains {len(combined_graph.nodes):,} nodes and {len(combined_graph.edges):,} edges")
+                st.info(f"Network contains {len(combined_graph.nodes):,} nodes and {len(combined_graph.edges):,} edges")
 
                 # Step 5: Generate map
                 status_text.text("Creating visualization...")
@@ -527,7 +527,7 @@ def main():
                 progress_container.empty()
 
                 # Display map
-                st.success(f"🎉 Map of {city_name} generated successfully!")
+                st.success(f"Map of {city_name} generated successfully!")
                 st.markdown(f"**Networks included:** {', '.join(networks_downloaded)}")
 
                 st.pyplot(fig)
