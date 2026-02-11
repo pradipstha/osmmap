@@ -230,7 +230,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         # Create figure
         fig = plt.figure(figsize=(20, 22), facecolor='black')
         ax = fig.add_axes([0.05, 0.15, 0.9, 0.75])
-        ax = ox.plot_graph(
+        ox.plot_graph(
             graph,
             figsize=(30, 30),
             node_size=0,
