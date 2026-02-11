@@ -241,7 +241,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         # Add network types label
         network_kwargs = {'fontsize': 18, 'color': 'white', 'ha': 'center'}
         if font_prop:
-            etwork_kwargs['fontproperties'] = font_prop
+            network_kwargs['fontproperties'] = font_prop
 
         ax.text(0.5, 0.06, city_name.upper(),
                transform=ax.transAxes,
