@@ -69,6 +69,6 @@ This application uses OpenStreetMap data, which is © OpenStreetMap contributors
 ---
 **Made using Streamlit**
 
-<img width="350" height="350" alt="biratnagar_nepal_transport_map" src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" />
-<img width="350" height="350" alt="Detroit_Michigan_transport_map" src="https://github.com/user-attachments/assets/4cdb6398-1949-4e21-b788-ef18d20e9d69" />
+<img width="400" height="400" alt="biratnagar_nepal_transport_map" src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" />
+<img width="400" height="400" alt="Detroit_Michigan_transport_map" src="https://github.com/user-attachments/assets/4cdb6398-1949-4e21-b788-ef18d20e9d69" />
 
