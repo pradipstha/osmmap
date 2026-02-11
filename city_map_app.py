@@ -243,19 +243,17 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         formatted_city_name = city_name.title()
 
         # Add network types label
-        network_kwargs = {'fontsize': 15, 'color': 'white', 'ha': 'center'}
+        network_kwargs = {'fontsize': 18, 'color': 'white', 'ha': 'center'}
         if font_prop:
             network_kwargs['fontproperties'] = font_prop
-        ax.text(0.5, 0.10, network_types,
-               transform=ax.transAxes,
+        fig.text(0.5, 0.10, network_types,
                **network_kwargs)
 
         # Add city name         
-        city_kwargs = {'fontsize': 25, 'color': 'white', 'ha': 'center', 'weight': 'bold'}
+        city_kwargs = {'fontsize': 30, 'color': 'white', 'ha': 'center', 'weight': 'bold'}
         if font_prop:
             city_kwargs['fontproperties'] = font_prop
-        ax.text(0.5, 0.04, formatted_city_name,
-                transform=ax.transAxes,
+        fig.text(0.5, 0.04, formatted_city_name,
                 **city_kwargs)
 
         logger.info("Map visualization created successfully")
