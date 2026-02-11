@@ -68,7 +68,7 @@ This application uses OpenStreetMap data, which is © OpenStreetMap contributors
 
 ---
 
-**Made with ❤️ using Streamlit**
+**Made using Streamlit**
 
 
 <img width="800" height="800" alt="biratnagar_nepal_transport_map" src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" />
