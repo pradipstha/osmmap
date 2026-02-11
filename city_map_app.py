@@ -186,8 +186,6 @@ def download_osm_network(polygon_wkt, network_type):
             retain_all=False,
             truncate_by_edge=True
         )
-        
-        graph = ox.simplify_graph(graph)
 
         logger.info(f"Downloaded network: {len(graph.nodes):,} nodes | {len(graph.edges):,} edges")
         return True, graph
@@ -302,7 +300,7 @@ def main():
             "Map Radius (km)",
             min_value=5,
             max_value=50,
-            value=15,
+            value=20,
             step=1,
             help="Area to include around city center"
         )
