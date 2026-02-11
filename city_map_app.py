@@ -392,8 +392,8 @@ def main():
                 # Step 2: Create buffer
                 status_text.text("📍 Creating study area...")
                 success, result = create_city_buffer(
-                    location["latitude"]
-                    location["longitude"]
+                    location["latitude"],
+                    location["longitude"],
                     buffer_meters,
                     crs
                 )
