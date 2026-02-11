@@ -82,7 +82,7 @@ def load_custom_font():
 
 # Geocode city with caching
 @st.cache_data(ttl=86400)  
-def geocode_city(city_name, timeout=10):
+def geocode_city(city_name):
     """
     Geocode a city name to coordinates with error handling
     
@@ -94,52 +94,25 @@ def geocode_city(city_name, timeout=10):
         tuple: (success, location_or_error_message)
     """
     try:
-        # Use Nominatim with better configuration
-        geolocator = Nominatim(
-            user_agent="city_transport_map_app_v2",
-            timeout=timeout,
-            domain='nominatim.openstreetmap.org',
-            scheme='https'
-        )
-        
-        # Add retry logic
-        import time
-        max_retries = 3
-        for attempt in range(max_retries):
-            try:
-                location = geolocator.geocode(
-                    city_name,
-                    language="en",
-                    addressdetails=True
-                )
-                
-                if location is None:
-                    return False, f"City '{city_name}' not found. Try adding state/country (e.g., 'Paris, France')"
-                
-                logger.info(f"Successfully geocoded: {city_name} -> {location.address}")
-                return True, location
-                
-            except Exception as e:
-                if attempt < max_retries - 1:
-                    time.sleep(2)  # Wait 2 seconds before retry
-                    continue
-                else:
-                    raise e
-        
-    except Exception as e:
-        error_msg = str(e)
-        logger.error(f"Geocoding error: {error_msg}")
-        
-        # Provide helpful error messages
-        if "timed out" in error_msg.lower():
-            return False, "Geocoding service timed out. Please try again."
-        elif "connection" in error_msg.lower():
-            return False, "Cannot connect to geocoding service. Please try again in a moment."
-        elif "rate" in error_msg.lower() or "limit" in error_msg.lower():
-            return False, "Too many requests. Please wait a minute and try again."
-        else:
-            return False, f"Geocoding error: {error_msg}"
+        # Use OSMnx's Built-in Geocoder
+        gdf = ox.geocode_to_gdf(city_name)
+        if gdf.empty:
+            return False, f"City '{city_name}' not found."
 
+        location = gdf.iloc[0]
+        lat = location.geometry.centroid.y
+        lon = location.geometry.centroid.x
+
+        class SimpleLocation:
+            def __init__(self, lat, lon, address):
+                self.latitude = lat
+                self.longitude = lon
+                self.address = address
+
+        return True, SimpleLocation(lat, lon, city_name)
+
+    except Exception as e:
+        return False, f"Geocoding error: {str(e)}"
 
 # Create buffer around city with caching
 @st.cache_data(ttl=3600)  
