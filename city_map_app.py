@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 # Page configuration
 st.set_page_config(
-    page_title="City Map Generator",
+    page_title="City Transport Map Generator",
     page_icon="🗺️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -241,21 +241,26 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
      
         formatted_city_name = city_name.title()
 
-        # Add network types label
-        network_kwargs = {'fontsize': 18, 'color': 'white', 'ha': 'center', 'transform': ax.transAxes}
+        title_kwargs = {
+            'fontsize': 30, 
+            'color': 'white', 
+            'ha': 'center', 
+            'va': 'top', 
+            'weight': 'bold', 
+            'transform': ax.transAxes } 
+        subtitle_kwargs = {
+            'fontsize': 18, 
+            'color': 'white', 
+            'ha': 'center', 
+            'va': 'top', 
+            'transform': ax.transAxes }
         if font_prop:
-            network_kwargs['fontproperties'] = font_prop
-        ax.text(0.5, -0.05, network_types,
-               **network_kwargs)
+            title_kwargs['fontproperties'] = font_prop
+            subtitle_kwargs['fontproperties'] = font_prop
 
-        # Add city name         
-        city_kwargs = {'fontsize': 30, 'color': 'white', 'ha': 'center', 'weight': 'bold', 'transform': ax.transAxes}
-        if font_prop:
-            city_kwargs['fontproperties'] = font_prop
-        ax.text(0.5, -0.12, formatted_city_name,
-                **city_kwargs)
-        
-        fig.subplots_adjust(bottom=0.15)
+        ax.text(0.5, 0.98, formatted_city_name, **title_kwargs)
+        ax.text(0.5, 0.94, network_types, **subtitle_kwargs)
+        fig.subplots_adjust(top=0.92, bottom=0.05)
 
         logger.info("Map visualization created successfully")
         return True, fig
