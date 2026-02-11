@@ -386,7 +386,7 @@ def main():
                     st.stop()
 
                 location = result
-                st.success(f"✅ Found: {location['address']}}")
+                st.success(f"✅ Found: {location['address']}")
                 progress_bar.progress(20)
 
                 # Step 2: Create buffer
