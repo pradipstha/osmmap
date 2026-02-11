@@ -17,11 +17,10 @@ A web application that generates city transport maps using OpenStreetMap data.
 - **Matplotlib**: Visualization
 
 ### In the Sidebar:
-- **City Name**: Any city worldwide (include country for best results)
+- **City Name**: Any city worldwide
 - **Map Radius**: 5-50 km around city center
 - **Coordinate System**: Choose appropriate CRS for your region
 - **Network Types**: Drive, bike, walk (select multiple)
-- **Image Quality**: 72-600 DPI
 
 ### Common Issues:
 
