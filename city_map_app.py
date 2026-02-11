@@ -531,7 +531,7 @@ def main():
         st.info(" Configure your map settings in the sidebar and click 'Generate Map' to begin")
 
         st.markdown("---")
-        st.subheader("Features")
+        st.subheader("")
 
         col_a, col_b = st.columns(2)
 
