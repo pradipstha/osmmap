@@ -264,6 +264,20 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
 
         ax.text(x_position, network_y, network_types, **network_kwargs)
         ax.text(x_position, city_y, formatted_city_name, **city_kwargs)
+
+        # Add credit at BOTTOM RIGHT
+        credit_kwargs = {
+            'color': 'white',
+            'ha': 'right',              # Right-aligned
+            'va': 'bottom',
+            'fontsize': 8,             # Smaller font for credit
+            'alpha': 0.7,               # Slightly transparent
+            'transform': ax.transAxes
+        }
+        if font_prop:
+            credit_kwargs['fontproperties'] = font_prop
+            
+        ax.text(0.95, 0.03, 'App by Pradip Shrestha, 2026', **credit_kwargs)
         
         fig.subplots_adjust(top=0.98, bottom=0.02)
 
