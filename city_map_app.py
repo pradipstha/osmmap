@@ -187,7 +187,7 @@ def download_osm_network(polygon_wkt, network_type):
             truncate_by_edge=True
         )
         
-         graph = ox.simplify_graph(graph)
+        graph = ox.simplify_graph(graph)
 
         logger.info(f"Downloaded network: {len(graph.nodes):,} nodes | {len(graph.edges):,} edges")
         return True, graph
