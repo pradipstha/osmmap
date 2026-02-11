@@ -244,7 +244,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         # Base style
         base_kwargs = {
             'color': 'white',
-            'ha': 'center',
+            'ha': 'left',
             'va': 'bottom',
             'transform': ax.transAxes}
         
@@ -257,12 +257,13 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         network_kwargs.update({'fontsize': 18})
 
         # Place at bottom inside axes; minimal gap
+        x_position = 0.05
         city_y = 0.03
         gap = 0.025 
         network_y = city_y + gap
 
-        ax.text(0.5, network_y, network_types, **network_kwargs)
-        ax.text(0.5, city_y, formatted_city_name, **city_kwargs)
+        ax.text(x_position, network_y, network_types, **network_kwargs)
+        ax.text(x_position, city_y, formatted_city_name, **city_kwargs)
         
         fig.subplots_adjust(top=0.98, bottom=0.02)
 
