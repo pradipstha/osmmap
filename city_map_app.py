@@ -166,22 +166,35 @@ def download_osm_network(polygon_wkt, network_type):
         from shapely import wkt
         polygon = wkt.loads(polygon_wkt)
 
-        # Configure OSMnx
-        ox.settings.use_cache = True
-        ox.settings.log_console = False
+        # ---- OSMnx Performance Settings ----
+        ox.settings.use_cache = True              
+        ox.settings.log_console = False           
+        ox.settings.timeout = 180                 
+        ox.settings.memory = 1024                 
+        ox.settings.max_query_area_size = 50_000_000  
+
+        # Optional: speed boost for large polygons
+        if polygon.area > 5:  
+            simplify = True
+        else:
+            simplify = True
 
         graph = ox.graph_from_polygon(
             polygon, 
-            network_type=network_type,
-            simplify=True
+            network_type="all",
+            simplify=True,
+            retain_all=False,
+            truncate_by_edge=True
         )
+        
+         graph = ox.simplify_graph(graph)
 
-        logger.info(f"Downloaded {network_type} network: {len(graph.nodes)} nodes, {len(graph.edges)} edges")
+        logger.info(f"Downloaded network: {len(graph.nodes):,} nodes | {len(graph.edges):,} edges")
         return True, graph
 
     except Exception as e:
-        logger.error(f"Network download error ({network_type}): {str(e)}")
-        return False, f"Error downloading {network_type} network: {str(e)}"
+        logger.error(f"Network download error: {str(e)}")
+        return False, f"Error downloading network: {str(e)}"
 
 # Generate map visualization
 def generate_map_image(graph, city_name, network_types, font_prop=None):
