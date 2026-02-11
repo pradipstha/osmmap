@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 # Page configuration
 st.set_page_config(
-    page_title="City Transport Map Generator",
+    page_title="City Map Generator",
     page_icon="🗺️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -263,7 +263,7 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
         return False, f"Error generating map: {str(e)}"
 
 # Convert figure to bytes for download
-def fig_to_bytes(fig, dpi=150):
+def fig_to_bytes(fig, dpi=250):
     """Convert matplotlib figure to bytes"""
     buf = io.BytesIO()
     fig.savefig(buf, format='png', dpi=dpi, bbox_inches='tight', facecolor='black')
@@ -274,7 +274,7 @@ def fig_to_bytes(fig, dpi=150):
 def main():
     # Header
     st.title("City Transport Map Generator")
-    st.markdown("Generate beautiful street network maps from OpenStreetMap data")
+    st.markdown("Generate street network maps from OpenStreetMap data")
 
     # Sidebar for inputs
     with st.sidebar:
@@ -352,7 +352,6 @@ def main():
             - Include country/state in city name
             - Start with smaller radius for faster results
             - Large cities may take 1-2 minutes
-            - Generated maps are cached for faster re-generation
 
             **Network Types:**
             - **Drive**: All drivable roads
