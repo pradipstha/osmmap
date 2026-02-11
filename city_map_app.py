@@ -252,9 +252,9 @@ def generate_map_image(graph, city_name, network_types, font_prop=None):
             base_kwargs['fontproperties'] = font_prop
 
         city_kwargs = dict(base_kwargs)
-        city_kwargs.update({'fontsize': 25, 'weight': 'bold'})
+        city_kwargs.update({'fontsize': 23, 'weight': 'bold'})
         network_kwargs = dict(base_kwargs)
-        network_kwargs.update({'fontsize': 18})
+        network_kwargs.update({'fontsize': 15})
 
         # Place at bottom inside axes; minimal gap
         x_position = 0.05
