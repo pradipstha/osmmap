@@ -213,7 +213,7 @@ def download_osm_network(polygon_wkt, network_type):
         return False, f"Error downloading {network_type} network: {str(e)}"
 
 # Generate map visualization
-def generate_map_image(graph, city_name, font_prop=None):
+def generate_map_image(graph, city_name, network_types, font_prop=None):
     """
     Generate map visualization from network graph
 
@@ -238,23 +238,22 @@ def generate_map_image(graph, city_name, font_prop=None):
             close=False
         )
 
-        # Add city name
-        font_kwargs = {'fontsize': 40, 'color': 'white', 'ha': 'center', 'weight': 'bold'}
+        # Add network types label
+        network_kwargs = {'fontsize': 18, 'color': 'white', 'ha': 'center'}
         if font_prop:
-            font_kwargs['fontproperties'] = font_prop
+            etwork_kwargs['fontproperties'] = font_prop
 
-        ax.text(0.5, 0.05, city_name.upper(),
+        ax.text(0.5, 0.06, city_name.upper(),
                transform=ax.transAxes,
                **font_kwargs)
 
-        # Add map type label
-        label_kwargs = {'fontsize': 20, 'color': 'white', 'ha': 'center'}
+        # Add city name         
+        city_kwargs = {'fontsize': 30, 'color': 'white', 'ha': 'center', 'weight': 'bold'}
         if font_prop:
-            label_kwargs['fontproperties'] = font_prop
-
-        ax.text(0.5, 0.02, 'TRANSPORT MAP',
-               transform=ax.transAxes,
-               **label_kwargs)
+            city_kwargs['fontproperties'] = font_prop
+        ax.text(0.5, 0.03, city_name,
+                transform=ax.transAxes,
+                **city_kwargs)
 
         logger.info("Map visualization created successfully")
         return True, fig
@@ -274,7 +273,7 @@ def fig_to_bytes(fig, dpi=150):
 # Main app
 def main():
     # Header
-    st.title("🗺️ City Transport Map Generator")
+    st.title("City Transport Map Generator")
     st.markdown("Generate beautiful street network maps from OpenStreetMap data")
 
     # Sidebar for inputs
@@ -306,6 +305,13 @@ def main():
             "Texas State Plane (North Central)": 2277,
             "UTM Zone 10N (West US)": 32610,
             "UTM Zone 33N (Europe)": 32633,
+            "UTM Zone 43N (India West/Central)": 32643,
+            "UTM Zone 44N (India Central/East)": 32644,
+            "UTM Zone 45N (India East/Bangladesh)": 32645,
+            "UTM Zone 46N (Bangladesh East)": 32646,
+            "UTM Zone 47N (Thailand/Myanmar)": 32647,
+            "UTM Zone 48N (Vietnam)": 32648,
+            "UTM Zone 51N (Japan/Korea)": 32651,
         }
 
         crs_choice = st.selectbox(
@@ -359,6 +365,8 @@ def main():
             - **Texas**: State Plane 2277
             - **West US**: UTM Zone 10N
             - **Europe**: UTM Zone 33N
+            - **India West/Central**: UTM Zone 43N
+            - **India East/Bangladesh**: UTM Zone 44N-45N
             """)
 
     # Main content area
@@ -473,10 +481,13 @@ def main():
                 st.info(f"📊 Network contains {len(combined_graph.nodes):,} nodes and {len(combined_graph.edges):,} edges")
 
                 # Step 5: Generate map
-                status_text.text("🎨 Creating visualization...")
+                status_text.text("Creating visualization...")
                 progress_bar.progress(90)
 
-                success, result = generate_map_image(combined_graph, city_name, font_prop)
+                # Create network types label
+                network_label = " and ".join(networks_downloaded)
+                
+                success, result = generate_map_image(combined_graph, city_name, network_label, font_prop)
 
                 if not success:
                     st.error(f"❌ {result}")
