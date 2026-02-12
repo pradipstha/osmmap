@@ -68,8 +68,8 @@ This application uses OpenStreetMap data, which is © OpenStreetMap contributors
 ---
 **Made using Streamlit**
 
-<img width="200" height="600" alt="Amsterdam_Netherlands_transport_map" src="https://github.com/user-attachments/assets/66c7c44a-6f99-4c6a-a6d1-1edeea691222" />
-<img width="200" height="300" alt="biratnagar_nepal_transport_map" src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" />
-<img width="200" height="300" alt="Detroit_Michigan_transport_map" src="https://github.com/user-attachments/assets/4cdb6398-1949-4e21-b788-ef18d20e9d69" />
+<img width="300" height="600" alt="Amsterdam_Netherlands_transport_map" src="https://github.com/user-attachments/assets/66c7c44a-6f99-4c6a-a6d1-1edeea691222" />
+<img width="300" height="400" alt="biratnagar_nepal_transport_map" src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" />
+<img width="300" height="400" alt="Detroit_Michigan_transport_map" src="https://github.com/user-attachments/assets/4cdb6398-1949-4e21-b788-ef18d20e9d69" />
 
 
