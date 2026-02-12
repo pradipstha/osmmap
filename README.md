@@ -1,9 +1,9 @@
 # City Transport Map Generator - Streamlit App
 
 A web application that generates city transport maps using OpenStreetMap data.
+https://osmmap-map-generator.streamlit.app/
 
 ## Features
-
 - ✅ **Global Coverage**: Generate maps for any city worldwide
 - ✅ **Multiple Network Types**: Drive, bike, and walking paths
 - ✅ **High Resolution**: Export maps up to 600 DPI
@@ -16,7 +16,6 @@ A web application that generates city transport maps using OpenStreetMap data.
 - **Matplotlib**: Visualization
 
 ### Common Issues:
-
 **"City not found"**
 - Solution: Add country/state (e.g., "Springfield, Illinois, USA")
 
@@ -46,18 +45,12 @@ A web application that generates city transport maps using OpenStreetMap data.
 - Bangkok, Thailand
 - Sydney, Australia
 
-## 📝 License
-
-This application uses OpenStreetMap data, which is © OpenStreetMap contributors and available under the Open Database License (ODbL).
-
 ## Credits
-
 - **OpenStreetMap**: Map data
 - **OSMnx**: Geoff Boeing
 - **AI**: Claude Sonnet 4.5 
 
 ## 💡 Tips for Best Results
-
 1. **Be Specific**: "Paris, France" > "Paris"
 2. **Start Small**: Test with 5km radius first
 3. **Multiple Networks**: Combine drive + bike for rich maps
@@ -65,6 +58,8 @@ This application uses OpenStreetMap data, which is © OpenStreetMap contributors
 5. **DPI Choice**: 150 DPI is perfect for most uses
 6. **Cache Benefit**: Same city regenerates instantly
 
+## 📝 License
+This application uses OpenStreetMap data, which is © OpenStreetMap contributors and available under the Open Database License (ODbL).
 ---
 **Made using Streamlit**
 
