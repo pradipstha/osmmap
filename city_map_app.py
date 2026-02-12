@@ -300,8 +300,8 @@ def main():
             "Map Radius (km)",
             min_value=5,
             max_value=50,
-            value=20,
-            step=1,
+            value=10,
+            step=5,
             help="Area to include around city center"
         )
         buffer_meters = buffer * 1000
