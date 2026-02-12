@@ -65,9 +65,9 @@ This application uses OpenStreetMap data, which is © OpenStreetMap contributors
 **Made using Streamlit**
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/66c7c44a-6f99-4c6a-a6d1-1edeea691222" height="200" />
-  <img src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" height="200" />
-  <img src="https://github.com/user-attachments/assets/4cdb6398-1949-4e21-b788-ef18d20e9d69" height="200" />
+  <img src="https://github.com/user-attachments/assets/66c7c44a-6f99-4c6a-a6d1-1edeea691222" height="250" />
+  <img src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" height="250" />
+  <img src="https://github.com/user-attachments/assets/4cdb6398-1949-4e21-b788-ef18d20e9d69" height="250" />
 </p>
 
 
