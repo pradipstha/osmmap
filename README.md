@@ -38,7 +38,6 @@ https://osmmap-map-generator.streamlit.app/
 4. Lower DPI for testing, increase for final export
 
 ## 📊 Cities To Try
-
 - New York, New York, USA
 - Barcelona, Spain
 - Amsterdam, Netherlands
@@ -59,12 +58,18 @@ https://osmmap-map-generator.streamlit.app/
 6. **Cache Benefit**: Same city regenerates instantly
 
 ## 📝 License
+
 This application uses OpenStreetMap data, which is © OpenStreetMap contributors and available under the Open Database License (ODbL).
+
 ---
 **Made using Streamlit**
 
-<img width="300" height="600" alt="Amsterdam_Netherlands_transport_map" src="https://github.com/user-attachments/assets/66c7c44a-6f99-4c6a-a6d1-1edeea691222" />
-<img width="300" height="400" alt="biratnagar_nepal_transport_map" src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" />
-<img width="300" height="400" alt="Detroit_Michigan_transport_map" src="https://github.com/user-attachments/assets/4cdb6398-1949-4e21-b788-ef18d20e9d69" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/66c7c44a-6f99-4c6a-a6d1-1edeea691222" height="300" />
+  <img src="https://github.com/user-attachments/assets/fb74b1da-0b26-495d-871d-c8cddfccbfc5" height="300" />
+  <img src="https://github.com/user-attachments/assets/4cdb6398-1949-4e21-b788-ef18d20e9d69" height="300" />
+</p>
+
+
 
 
